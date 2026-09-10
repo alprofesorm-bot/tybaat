@@ -10,9 +10,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 :root {
-    --primary: #10b981;
-    --primary-dark: #059669;
-    --bg: #f8fafc;
+    --primary: #d4af37;
+    --primary-dark: #aa8c2c;
+    --bg: #fdfbf7;
     --surface: #ffffff;
     --text: #1e293b;
     --text-muted: #64748b;
@@ -31,7 +31,7 @@ body { background: var(--bg); color: var(--text); padding-bottom: 50px; }
     .header-grid { flex-direction: row; justify-content: space-between; align-items: center; }
 }
 .logo { font-size: 22px; font-weight: 800; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 10px; }
-.logo-badge { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 10px; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); font-size: 18px; }
+.logo-badge { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 10px; box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3); font-size: 18px; }
 .search { display: flex; align-items: center; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 8px 12px; gap: 8px; flex: 1; max-width: 500px; }
 .search input { border: none; background: none; outline: none; width: 100%; font-size: 14px; }
 .search button { background: none; border: none; font-size: 16px; cursor: pointer; color: var(--text-muted); }
@@ -39,9 +39,9 @@ body { background: var(--bg); color: var(--text); padding-bottom: 50px; }
 .cart-btn:hover { background: var(--primary-dark); }
 
 /* Hero */
-.hero { background: linear-gradient(135deg, #059669, #10b981); color: white; padding: 32px 16px; text-align: center; margin-bottom: 24px; }
+.hero { background: linear-gradient(135deg, #aa8c2c, #d4af37); color: white; padding: 32px 16px; text-align: center; margin-bottom: 24px; }
 .hero h1 { font-size: 24px; margin-bottom: 12px; font-weight: 800; }
-.hero p { font-size: 14px; margin-bottom: 16px; opacity: 0.9; }
+.hero p { font-size: 14px; margin-bottom: 16px; opacity: 0.95; }
 .hero-btn { display: inline-block; background: white; color: var(--primary-dark); padding: 10px 20px; border-radius: var(--radius); font-weight: 700; text-decoration: none; }
 
 /* Main Content */
@@ -114,7 +114,7 @@ body { background: var(--bg); color: var(--text); padding-bottom: 50px; }
         </a>
         <div class="search">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <input id="search" type="search" placeholder="ابحث عن منتج، خضار، لحوم، أو وجبات...">
+            <input id="search" type="search" placeholder="ابحث عن منتج، حبوب، معلبات...">
             <button id="clear"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <button id="openCart" class="cart-btn"><i class="fa-solid fa-shopping-bag"></i> <span>السلة</span> <b id="cartCount">0</b></button>
@@ -124,8 +124,8 @@ body { background: var(--bg); color: var(--text); padding-bottom: 50px; }
 <section class="hero">
     <div class="wrap">
         <small>منصة طيبات العصرية</small>
-        <h1>أجود المواد الغذائية، الطازجة، ووجبات المطاعم</h1>
-        <p>اطلب احتياجات منزلك، الخضار الطازجة، اللحوم، وأشهى الوجبات بطلب واحد سريع وسهل.</p>
+        <h1>أجود المواد الغذائية والحبوب والمعلبات</h1>
+        <p>اطلب احتياجات منزلك من الأرز، البقوليات، والمعلبات بطلب واحد سريع وسهل.</p>
         <a href="#products" class="hero-btn">تصفح المنتجات الآن <i class="fa-solid fa-arrow-left"></i></a>
     </div>
 </section>
@@ -161,8 +161,8 @@ body { background: var(--bg); color: var(--text); padding-bottom: 50px; }
     
     <div id="empty" class="empty hidden">
         <i class="fa-solid fa-box-open" style="font-size: 32px; color: var(--text-muted); margin-bottom: 8px;"></i>
-        <h3>لا توجد نتائج مطابقة</h3>
-        <p>جرّب كلمة بحث أخرى أو غير القسم.</p>
+        <h3>لا توجد نتائج مطابقة أو القسم فارغ حالياً</h3>
+        <p>جرّب كلمة بحث أخرى أو تصفح الأقسام الأخرى.</p>
         <button id="reset" style="margin-top:10px; padding:8px 16px; background:var(--primary); color:white; border:none; border-radius:8px; cursor:pointer;">عرض كل المنتجات</button>
     </div>
 
@@ -177,8 +177,8 @@ body { background: var(--bg); color: var(--text); padding-bottom: 50px; }
     </div>
 </main>
 
-<!-- زر واتساب عائم في الأسفل (تم تحديث الرقم) -->
-<a href="https://wa.me/958953282" id="floatingWaBtn" target="_blank" class="whatsapp-float" aria-label="تواصل معنا عبر واتساب">
+<!-- زر واتساب عائم في الأسفل -->
+<a href="https://wa.me/963985953282" id="floatingWaBtn" target="_blank" class="whatsapp-float" aria-label="تواصل معنا عبر واتساب">
     <i class="fa-brands fa-whatsapp"></i>
 </a>
 
@@ -306,23 +306,7 @@ window.PRODUCTS = [
   { "name": "يالنجي (400 غ) زهرة البستان", "title": "يالنجي (400 غ)", "brand": "زهرة البستان", "price": 220, "image": "images/97.png", "alt": "يالنجي (400 غ) زهرة البستان", "category": "canned" },
   { "name": "ورق عنب (1250 غ) زهرة البستان", "title": "ورق عنب (1250 غ)", "brand": "زهرة البستان", "price": 520, "image": "images/98.png", "alt": "ورق عنب (1250 غ) زهرة البستان", "category": "canned" },
   { "name": "ذرة (340 غ) الغوطة", "title": "ذرة (340 غ)", "brand": "الغوطة", "price": 130, "image": "images/99.png", "alt": "ذرة (340 غ) الغوطة", "category": "canned" },
-  { "name": "مسبحة (380 غ) الغوطة", "title": "مسبحة (380 غ)", "brand": "الغوطة", "price": 170, "image": "images/100.png", "alt": "مسبحة (380 غ) الغوطة", "category": "canned" },
-
-  // فئة الخضار الطازجة
-  { "name": "بندورة طازجة كيلو", "title": "بندورة طازجة (1 كغ)", "brand": "خضار طازجة", "price": 90, "image": "images/1.png", "alt": "بندورة طازجة", "category": "vegetables" },
-  { "name": "خيار بلدي كيلو", "title": "خيار بلدي (1 كغ)", "brand": "خضار طازجة", "price": 80, "image": "images/2.png", "alt": "خيار بلدي", "category": "vegetables" },
-  { "name": "بطاطا محلية كيلو", "title": "بطاطا (1 كغ)", "brand": "خضار طازجة", "price": 75, "image": "images/3.png", "alt": "بطاطا", "category": "vegetables" },
-  { "name": "حزمة باقدونس طازجة", "title": "بقدونس", "brand": "خضار طازجة", "price": 25, "image": "images/4.png", "alt": "بقدونس", "category": "vegetables" },
-
-  // فئة اللحوم
-  { "name": "لحمة هبرة غنم كيلو", "title": "لحمة هبرة غنم (1 كغ)", "brand": "ملحمة الطيبي", "price": 1200, "image": "images/5.png", "alt": "لحمة غنم", "category": "meat" },
-  { "name": "دجاجة كاملة طازجة وزن كيلو ونصف", "title": "دجاج طازج", "brand": "مزرعة الخير", "price": 450, "image": "images/6.png", "alt": "دجاج طازج", "category": "meat" },
-  { "name": "سجق أرماني كيلو", "title": "سجق (1 كغ)", "brand": "ملحمة الطيبي", "price": 950, "image": "images/7.png", "alt": "سجق", "category": "meat" },
-
-  // فئة المطاعم والوجبات
-  { "name": "وجبة شاورما عربي دبل", "title": "وجبة شاورما عربي", "brand": "مطاعم الشام", "price": 350, "image": "images/8.png", "alt": "شاورما عربي", "category": "restaurants" },
-  { "name": "برجر دجاج كومبو", "title": "برجر دجاج", "brand": "مطاعم الشام", "price": 300, "image": "images/9.png", "alt": "برجر دجاج", "category": "restaurants" },
-  { "name": "صيادية طاووق مع العيار", "title": "وجبة طاووق", "brand": "مطاعم الشام", "price": 400, "image": "images/10.png", "alt": "طاووق", "category": "restaurants" }
+  { "name": "مسبحة (380 غ) الغوطة", "title": "مسبحة (380 غ)", "brand": "الغوطة", "price": 170, "image": "images/100.png", "alt": "مسبحة (380 غ) الغوطة", "category": "canned" }
 ];
 
 let cart = JSON.parse(localStorage.getItem('tayebat_cart')) || [];
@@ -416,7 +400,7 @@ function showToast() {
     setTimeout(() => { t.style.display = 'none'; }, 2000);
 }
 
-// إرسال المنتج غير الموجود عبر واتساب (تم تحديث الرقم)
+// إرسال المنتج غير الموجود عبر واتساب
 function sendMissingProduct() {
     let input = document.getElementById('missingProductInput');
     let val = input.value.trim();
@@ -425,7 +409,7 @@ function sendMissingProduct() {
         return;
     }
     let text = `مرحباً، أريد طلب هذا المنتج غير الموجود في الموقع:%0A- ${val}`;
-    window.open(`https://wa.me/958953282?text=${text}`, '_blank');
+    window.open(`https://wa.me/963985953282?text=${text}`, '_blank');
 }
 
 document.querySelectorAll('.cats button').forEach(btn => {
@@ -475,8 +459,7 @@ document.getElementById('send').addEventListener('click', () => {
     cart.forEach(i => { text += `- ${i.name} (${i.qty}) - ${i.price * i.qty} ل.س%0A`; });
     text += `%0Aالمجموع الكلي: ${totalEl.textContent}`;
     
-    // تم تحديث رقم الهاتف هنا لضمان إرسال الفاتورة تلقائياً للرقم المطلوب
-    window.open(`https://wa.me/958953282?text=${text}`, '_blank');
+    window.open(`https://wa.me/963985953282?text=${text}`, '_blank');
 });
 
 updateCart();
