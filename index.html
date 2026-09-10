@@ -177,8 +177,8 @@ body { background: var(--bg); color: var(--text); padding-bottom: 50px; }
     </div>
 </main>
 
-<!-- زر واتساب عائم في الأسفل -->
-<a href="https://wa.me/" id="floatingWaBtn" target="_blank" class="whatsapp-float" aria-label="تواصل معنا عبر واتساب">
+<!-- زر واتساب عائم في الأسفل (تم تحديث الرقم) -->
+<a href="https://wa.me/958953282" id="floatingWaBtn" target="_blank" class="whatsapp-float" aria-label="تواصل معنا عبر واتساب">
     <i class="fa-brands fa-whatsapp"></i>
 </a>
 
@@ -416,7 +416,7 @@ function showToast() {
     setTimeout(() => { t.style.display = 'none'; }, 2000);
 }
 
-// إرسال المنتج غير الموجود عبر واتساب
+// إرسال المنتج غير الموجود عبر واتساب (تم تحديث الرقم)
 function sendMissingProduct() {
     let input = document.getElementById('missingProductInput');
     let val = input.value.trim();
@@ -425,7 +425,7 @@ function sendMissingProduct() {
         return;
     }
     let text = `مرحباً، أريد طلب هذا المنتج غير الموجود في الموقع:%0A- ${val}`;
-    window.open(`https://wa.me/?text=${text}`, '_blank');
+    window.open(`https://wa.me/958953282?text=${text}`, '_blank');
 }
 
 document.querySelectorAll('.cats button').forEach(btn => {
@@ -474,7 +474,9 @@ document.getElementById('send').addEventListener('click', () => {
     let text = `طلب جديد من متجر طيبات:%0Aالاسم: ${nameInput.value}%0Aالعنوان: ${addressInput.value}%0A%0Aالطلبات:%0A`;
     cart.forEach(i => { text += `- ${i.name} (${i.qty}) - ${i.price * i.qty} ل.س%0A`; });
     text += `%0Aالمجموع الكلي: ${totalEl.textContent}`;
-    window.open(`https://wa.me/?text=${text}`, '_blank');
+    
+    // تم تحديث رقم الهاتف هنا لضمان إرسال الفاتورة تلقائياً للرقم المطلوب
+    window.open(`https://wa.me/958953282?text=${text}`, '_blank');
 });
 
 updateCart();
