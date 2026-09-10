@@ -68,8 +68,14 @@ body { background: var(--bg); color: var(--text); padding-bottom: 50px; }
 .card .brand { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
 .card .price-row { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
 .card .price { font-weight: 800; color: var(--primary-dark); font-size: 14px; }
-.card button { background: var(--text); color: white; border: none; padding: 6px 12px; border-radius: 8px; font-size: 12px; cursor: pointer; transition: background 0.2s; }
-.card button:hover { background: var(--primary-dark); }
+
+/* تعديل أزرار التحكم بالكمية تحت المنتج */
+.qty-control { display: flex; align-items: center; justify-content: space-between; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 4px 8px; width: 100%; margin-top: 8px; }
+.qty-control button { background: var(--surface); border: 1px solid var(--border); color: var(--text); width: 26px; height: 26px; border-radius: 6px; font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+.qty-control button:hover { background: var(--primary); color: white; border-color: var(--primary); }
+.qty-control span { font-size: 13px; font-weight: 700; }
+.add-initial-btn { background: var(--text); color: white; border: none; padding: 6px 12px; border-radius: 8px; font-size: 12px; cursor: pointer; transition: background 0.2s; display: flex; align-items: center; gap: 6px; justify-content: center; width: 100%; margin-top: 8px; }
+.add-initial-btn:hover { background: var(--primary-dark); }
 
 /* Missing Product Box */
 .missing-box { background: var(--surface); border: 2px dashed var(--primary); border-radius: var(--radius); padding: 24px; text-align: center; margin-top: 40px; }
@@ -166,7 +172,6 @@ body { background: var(--bg); color: var(--text); padding-bottom: 50px; }
         <button id="reset" style="margin-top:10px; padding:8px 16px; background:var(--primary); color:white; border:none; border-radius:8px; cursor:pointer;">عرض كل المنتجات</button>
     </div>
 
-    <!-- قسم الطلبات الخاصة للمنتجات غير الموجودة -->
     <div class="missing-box">
         <h3>هل تبحث عن منتج معين وغير موجود في الموقع؟</h3>
         <p>اكتب لنا اسم المنتج وسوف نوفره لك فوراً ونرسل لك تفاصيله عبر الواتساب!</p>
@@ -177,12 +182,11 @@ body { background: var(--bg); color: var(--text); padding-bottom: 50px; }
     </div>
 </main>
 
-<!-- زر واتساب عائم في الأسفل -->
 <a href="https://wa.me/963985953282" id="floatingWaBtn" target="_blank" class="whatsapp-float" aria-label="تواصل معنا عبر واتساب">
     <i class="fa-brands fa-whatsapp"></i>
 </a>
 
-<div id="toast" class="toast"><i class="fa-solid fa-circle-check" style="color:var(--primary);"></i> تمت الإضافة إلى السلة بنجاح</div>
+<div id="toast" class="toast"><i class="fa-solid fa-circle-check" style="color:var(--primary);"></i> تم تحديث السلة بنجاح</div>
 <div id="overlay" class="overlay"></div>
 
 <aside id="drawer" class="drawer">
@@ -344,25 +348,54 @@ function renderProducts() {
     }
     emptyEl.classList.add('hidden');
 
-    grid.innerHTML = filtered.map((p) => `
-        <div class="card">
-            <div>
-                <img src="${p.image}" alt="${p.alt}" loading="lazy" onerror="this.src='https://via.placeholder.com/150?text=Tayebat'">
-                <div class="brand">${p.brand}</div>
-                <h3>${p.title}</h3>
+    grid.innerHTML = filtered.map((p) => {
+        let cartItem = cart.find(i => i.name === p.name);
+        let qty = cartItem ? cartItem.qty : 0;
+        
+        let actionHTML = qty === 0 ? `
+            <button class="add-initial-btn" onclick="updateItemQty('${p.name.replace(/'/g, "\\'")}', ${p.price}, 1)">
+                <i class="fa-solid fa-basket-shopping"></i> إضافة للسلة
+            </button>
+        ` : `
+            <div class="qty-control">
+                <button onclick="updateItemQty('${p.name.replace(/'/g, "\\'")}', ${p.price}, -1)"><i class="fa-solid fa-minus"></i></button>
+                <span>${qty}</span>
+                <button onclick="updateItemQty('${p.name.replace(/'/g, "\\'")}', ${p.price}, 1)"><i class="fa-solid fa-plus"></i></button>
             </div>
-            <div class="price-row">
-                <span class="price">${p.price} ل.س</span>
-                <button onclick="addToCart('${p.name.replace(/'/g, "\\'")}', ${p.price})">إضافة</button>
+        `;
+
+        return `
+            <div class="card">
+                <div>
+                    <img src="${p.image}" alt="${p.alt}" loading="lazy" onerror="this.src='https://via.placeholder.com/150?text=Tayebat'">
+                    <div class="brand">${p.brand}</div>
+                    <h3>${p.title}</h3>
+                </div>
+                <div>
+                    <div class="price-row">
+                        <span class="price">${p.price} ل.س</span>
+                    </div>
+                    ${actionHTML}
+                </div>
             </div>
-        </div>
-    `).join('');
+        `;
+    }).join('');
 }
 
-function addToCart(name, price) {
-    let item = cart.find(i => i.name === name);
-    if (item) { item.qty++; } else { cart.push({name, price, qty: 1}); }
+function updateItemQty(name, price, change) {
+    let itemIndex = cart.findIndex(i => i.name === name);
+    
+    if (itemIndex > -1) {
+        cart[itemIndex].qty += change;
+        if (cart[itemIndex].qty <= 0) {
+            cart.splice(itemIndex, 1);
+        }
+    } else if (change > 0) {
+        cart.push({ name, price, qty: 1 });
+    }
+    
     saveAndSyncCart();
+    renderProducts();
     showToast();
 }
 
@@ -384,14 +417,15 @@ function updateCart() {
                 <div style="font-weight:700; font-size:13px;">${i.name}</div>
                 <div style="font-size:12px; color:var(--text-muted);">${i.price} ل.س × ${i.qty}</div>
             </div>
-            <button onclick="removeFromCart(${idx})" style="background:#ef4444; color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer; font-size:11px;"><i class="fa-solid fa-trash"></i></button>
+            <button onclick="removeFromCart('${i.name.replace(/'/g, "\\'")}')" style="background:#ef4444; color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer; font-size:11px;"><i class="fa-solid fa-trash"></i></button>
         </div>
     `).join('') || '<p style="text-align:center; color:var(--text-muted); padding: 20px 0;">السلة فارغة</p>';
 }
 
-function removeFromCart(idx) {
-    cart.splice(idx, 1);
+function removeFromCart(name) {
+    cart = cart.filter(i => i.name !== name);
     saveAndSyncCart();
+    renderProducts();
 }
 
 function showToast() {
@@ -400,7 +434,6 @@ function showToast() {
     setTimeout(() => { t.style.display = 'none'; }, 2000);
 }
 
-// إرسال المنتج غير الموجود عبر واتساب
 function sendMissingProduct() {
     let input = document.getElementById('missingProductInput');
     let val = input.value.trim();

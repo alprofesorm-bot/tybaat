@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         message += `\n💰 المجموع الكلي: ${total} ل.س`;
 
-        const phone = "963985953282";
+        const phone = "963958953282";
         window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
     });
 
