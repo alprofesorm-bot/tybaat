@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const itemsContainer = document.getElementById('items');
     const totalEl = document.getElementById('total');
     const emptyState = document.getElementById('empty');
-    const resetBtn = document.getElementById('reset');
     const countEl = document.getElementById('count');
     const sortSelect = document.getElementById('sort');
     const catsContainer = document.getElementById('cats');
@@ -29,12 +28,12 @@ document.addEventListener('DOMContentLoaded', () => {
             emptyState.classList.remove('hidden');
         } else {
             emptyState.classList.add('hidden');
-            productsToRender.forEach((p, index) => {
+            productsToRender.forEach((p) => {
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.innerHTML = `
                     <div class="card-img-wrap">
-                        <img src="${p.image}" alt="${p.alt || p.name}">
+                        <img src="${p.image}" alt="${p.name}">
                     </div>
                     <div class="card-body">
                         <span class="card-brand">${p.brand || 'طيبات'}</span>
@@ -62,15 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (currentCategory !== 'all') {
-            result = result.filter(p => {
-                if (currentCategory === 'rice') return p.name.includes('رز');
-                if (currentCategory === 'grains') return p.name.includes('عدس') || p.name.includes('فول') || p.name.includes('حمص') || p.name.includes('برغل') || p.name.includes('شوفان') || p.name.includes('فاصولياء');
-                if (currentCategory === 'canned') return p.name.includes('تونا') || p.name.includes('سردين') || p.name.includes('مرتاديلا') || p.name.includes('ذرة') || p.name.includes('فطر');
-                if (currentCategory === 'vegetables') return p.brand === 'خضار طازجة' || p.name.includes('بندورة') || p.name.includes('خيار') || p.name.includes('بطاطا') || p.name.includes('بقدونس');
-                if (currentCategory === 'meat') return p.brand === 'ملحمة الطيبي' || p.brand === 'مزرعة الخير' || p.name.includes('لحمة') || p.name.includes('دجاج') || p.name.includes('سجق');
-                if (currentCategory === 'restaurants') return p.brand === 'مطاعم الشام' || p.name.includes('شاورما') || p.name.includes('برجر') || p.name.includes('وجبة') || p.name.includes('طاووق');
-                return true;
-            });
+            result = result.filter(p => p.category === currentCategory);
         }
 
         const sortVal = sortSelect.value;
@@ -109,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
         itemsContainer.innerHTML = '';
 
         if (cart.length === 0) {
-            itemsContainer.innerHTML = '<p style="text-align:center; color:#64748b; margin-top:30px;">سلة التسوق فارغة حالياً</p>';
+            itemsContainer.innerHTML = '<p style="text-align:center; color:#78716c; margin-top:30px;">سلة التسوق فارغة حالياً</p>';
         } else {
             cart.forEach((item, index) => {
                 totalCount += item.qty;
@@ -120,12 +111,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 row.innerHTML = `
                     <div>
                         <strong>${item.name}</strong><br>
-                        <small style="color:#64748b;">${item.price} ل.س × ${item.qty}</small>
+                        <small style="color:#78716c;">${item.price} ل.س × ${item.qty}</small>
                     </div>
                     <div style="display:flex; align-items:center; gap:8px;">
-                        <button onclick="changeQty(${index}, 1)" style="width:26px; height:26px; background:#f1f5f9; border:none; border-radius:6px; cursor:pointer; font-weight:bold;">+</button>
+                        <button onclick="changeQty(${index}, 1)" style="width:26px; height:26px; background:#f5f5f4; border:none; border-radius:6px; cursor:pointer; font-weight:bold;">+</button>
                         <span>${item.qty}</span>
-                        <button onclick="changeQty(${index}, -1)" style="width:26px; height:26px; background:#f1f5f9; border:none; border-radius:6px; cursor:pointer; font-weight:bold;">-</button>
+                        <button onclick="changeQty(${index}, -1)" style="width:26px; height:26px; background:#f5f5f4; border:none; border-radius:6px; cursor:pointer; font-weight:bold;">-</button>
                     </div>
                 `;
                 itemsContainer.appendChild(row);
@@ -148,9 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function showToast(msg) {
         toast.textContent = msg;
         toast.classList.add('show');
-        setTimeout(() => {
-            toast.classList.remove('show');
-        }, 2500);
+        setTimeout(() => { toast.classList.remove('show'); }, 2500);
     }
 
     openCartBtn.addEventListener('click', () => {
@@ -171,14 +160,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     clearBtn.addEventListener('click', () => {
         searchInput.value = '';
-        filterAndSortProducts();
-    });
-
-    resetBtn.addEventListener('click', () => {
-        searchInput.value = '';
-        currentCategory = 'all';
-        document.querySelectorAll('.cats button').forEach(b => b.classList.remove('active'));
-        document.querySelector('.cats button[data-cat="all"]').classList.add('active');
         filterAndSortProducts();
     });
 
@@ -204,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        let message = `مرحباً، أود طلب المنتجات التالية من متجر طيبات:\n\n👤 الاسم: ${name}\n📍 العنوان: ${address}\n\n`;
+        let message = `مرحباً، أود طلب المنتجات التالية:\n\n👤 الاسم: ${name}\n📍 العنوان: ${address}\n\n`;
         let total = 0;
         cart.forEach(item => {
             message += `- ${item.name} (${item.qty}x) = ${item.price * item.qty} ل.س\n`;
@@ -212,9 +193,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         message += `\n💰 المجموع الكلي: ${total} ل.س`;
 
-        const phone = "963985953282"; // استبدل برقم الواتساب الخاص بك
-        const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-        window.open(url, '_blank');
+        const phone = "963985953282";
+        window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
     });
 
     renderProducts(window.PRODUCTS);
