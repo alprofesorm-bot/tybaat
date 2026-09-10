@@ -182,7 +182,7 @@ body { background: var(--bg); color: var(--text); padding-bottom: 50px; }
     </div>
 </main>
 
-<a href="https://wa.me/963985953282" id="floatingWaBtn" target="_blank" class="whatsapp-float" aria-label="تواصل معنا عبر واتساب">
+<a href="https://wa.me/963958953282" id="floatingWaBtn" target="_blank" class="whatsapp-float" aria-label="تواصل معنا عبر واتساب">
     <i class="fa-brands fa-whatsapp"></i>
 </a>
 
@@ -442,7 +442,7 @@ function sendMissingProduct() {
         return;
     }
     let text = `مرحباً، أريد طلب هذا المنتج غير الموجود في الموقع:%0A- ${val}`;
-    window.open(`https://wa.me/963985953282?text=${text}`, '_blank');
+    window.open(`https://wa.me/963958953282?text=${text}`, '_blank');
 }
 
 document.querySelectorAll('.cats button').forEach(btn => {
@@ -492,7 +492,7 @@ document.getElementById('send').addEventListener('click', () => {
     cart.forEach(i => { text += `- ${i.name} (${i.qty}) - ${i.price * i.qty} ل.س%0A`; });
     text += `%0Aالمجموع الكلي: ${totalEl.textContent}`;
     
-    window.open(`https://wa.me/963985953282?text=${text}`, '_blank');
+    window.open(`https://wa.me/963958953282?text=${text}`, '_blank');
 });
 
 updateCart();
