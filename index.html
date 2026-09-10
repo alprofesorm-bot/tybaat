@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>طيبات | متجر المواد الغذائية والمنتجات الطازجة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+    --primary: #10b981;
+    --primary-dark: #059669;
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --radius: 12px;
+    --danger: #ef4444;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tajawal', sans-serif; }
+body { background: var(--bg); color: var(--text); padding-bottom: 50px; }
+.wrap { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+
+/* Header */
+.header { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 12px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
+.header-grid { display: flex; flex-direction: column; gap: 12px; }
+@media (min-width: 768px) {
+    .header-grid { flex-direction: row; justify-content: space-between; align-items: center; }
+}
+.logo { font-size: 22px; font-weight: 800; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+.logo-badge { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 10px; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); font-size: 18px; }
+.search { display: flex; align-items: center; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 8px 12px; gap: 8px; flex: 1; max-width: 500px; }
+.search input { border: none; background: none; outline: none; width: 100%; font-size: 14px; }
+.search button { background: none; border: none; font-size: 16px; cursor: pointer; color: var(--text-muted); }
+.cart-btn { background: var(--primary); color: white; border: none; padding: 8px 16px; border-radius: var(--radius); font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; justify-content: center; transition: background 0.2s; }
+.cart-btn:hover { background: var(--primary-dark); }
+
+/* Hero */
+.hero { background: linear-gradient(135deg, #059669, #10b981); color: white; padding: 32px 16px; text-align: center; margin-bottom: 24px; }
+.hero h1 { font-size: 24px; margin-bottom: 12px; font-weight: 800; }
+.hero p { font-size: 14px; margin-bottom: 16px; opacity: 0.9; }
+.hero-btn { display: inline-block; background: white; color: var(--primary-dark); padding: 10px 20px; border-radius: var(--radius); font-weight: 700; text-decoration: none; }
+
+/* Main Content */
+.top { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
+@media (min-width: 768px) {
+    .top { flex-direction: row; justify-content: space-between; align-items: center; }
+}
+.tools { display: flex; gap: 12px; align-items: center; justify-content: space-between; }
+.tools select { padding: 8px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); font-size: 14px; outline: none; }
+
+/* Categories */
+.cats { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 20px; scrollbar-width: none; }
+.cats::-webkit-scrollbar { display: none; }
+.cats button { background: var(--surface); border: 1px solid var(--border); padding: 8px 16px; border-radius: 20px; white-space: nowrap; font-size: 14px; cursor: pointer; color: var(--text); transition: all 0.2s; }
+.cats button.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+/* Grid & Cards */
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+@media (min-width: 768px) { .grid { grid-template-columns: repeat(4, 1fr); gap: 16px; } }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s, box-shadow 0.2s; }
+.card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.card img { width: 100%; height: 120px; object-fit: contain; margin-bottom: 8px; }
+.card h3 { font-size: 14px; margin-bottom: 4px; font-weight: 700; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.card .brand { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
+.card .price-row { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
+.card .price { font-weight: 800; color: var(--primary-dark); font-size: 14px; }
+.card button { background: var(--text); color: white; border: none; padding: 6px 12px; border-radius: 8px; font-size: 12px; cursor: pointer; transition: background 0.2s; }
+.card button:hover { background: var(--primary-dark); }
+
+/* Missing Product Box */
+.missing-box { background: var(--surface); border: 2px dashed var(--primary); border-radius: var(--radius); padding: 24px; text-align: center; margin-top: 40px; }
+.missing-box h3 { font-size: 18px; margin-bottom: 8px; color: var(--text); }
+.missing-box p { font-size: 14px; color: var(--text-muted); margin-bottom: 16px; }
+.missing-input-group { display: flex; gap: 8px; max-width: 500px; margin: 0 auto; flex-direction: column; }
+@media(min-width: 576px) { .missing-input-group { flex-direction: row; } }
+.missing-input-group input { flex: 1; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius); outline: none; font-size: 14px; }
+.missing-input-group button { background: #25d366; color: white; border: none; padding: 10px 20px; border-radius: var(--radius); font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+
+/* Floating WhatsApp Button */
+.whatsapp-float { position: fixed; bottom: 25px; left: 25px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); z-index: 150; text-decoration: none; transition: transform 0.2s; }
+.whatsapp-float:hover { transform: scale(1.1); }
+
+/* Empty state */
+.empty { text-align: center; padding: 40px 20px; }
+.empty.hidden { display: none; }
+
+/* Drawer Cart */
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; z-index: 200; backdrop-filter: blur(2px); }
+.overlay.active { display: block; }
+.drawer { position: fixed; top: 0; left: 0; bottom: 0; width: 100%; max-width: 380px; background: var(--surface); z-index: 201; transform: translateX(-100%); transition: transform 0.3s ease; display: flex; flex-direction: column; }
+.drawer.active { transform: translateX(0); }
+.drawer-head { padding: 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.items { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.cart-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+.checkout-box { padding: 16px; border-top: 1px solid var(--border); background: var(--bg); display: flex; flex-direction: column; gap: 8px; }
+.checkout-box input { padding: 10px; border-radius: var(--radius); border: 1px solid var(--border); font-size: 14px; outline: none; }
+.form-error { font-size: 11px; color: var(--danger); display: none; margin-top: -4px; }
+.send { background: #25d366; color: white; border: none; padding: 12px; border-radius: var(--radius); font-weight: 700; cursor: pointer; text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px; }
+
+/* Toast Notification */
+.toast { position: fixed; bottom: 20px; right: 20px; background: var(--text); color: white; padding: 10px 20px; border-radius: var(--radius); z-index: 300; display: none; font-size: 13px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+</style>
+</head>
+<body>
+
+<header class="header">
+    <div class="wrap header-grid">
+        <a class="logo" href="#">
+            <div class="logo-badge"><i class="fa-solid fa-basket-shopping"></i></div> طيبات
+        </a>
+        <div class="search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input id="search" type="search" placeholder="ابحث عن منتج، خضار، لحوم، أو وجبات...">
+            <button id="clear"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <button id="openCart" class="cart-btn"><i class="fa-solid fa-shopping-bag"></i> <span>السلة</span> <b id="cartCount">0</b></button>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="wrap">
+        <small>منصة طيبات العصرية</small>
+        <h1>أجود المواد الغذائية، الطازجة، ووجبات المطاعم</h1>
+        <p>اطلب احتياجات منزلك، الخضار الطازجة، اللحوم، وأشهى الوجبات بطلب واحد سريع وسهل.</p>
+        <a href="#products" class="hero-btn">تصفح المنتجات الآن <i class="fa-solid fa-arrow-left"></i></a>
+    </div>
+</section>
+
+<main id="products" class="wrap main">
+    <div class="top">
+        <div>
+            <small style="color:var(--text-muted)">دليل المنتجات</small>
+            <h2>كل الأقسام</h2>
+        </div>
+        <div class="tools">
+            <span id="count" style="font-size: 13px; color:var(--text-muted);"></span>
+            <select id="sort">
+                <option value="default">الترتيب الافتراضي</option>
+                <option value="low">السعر: الأقل أولاً</option>
+                <option value="high">السعر: الأعلى أولاً</option>
+                <option value="az">الاسم: أ - ي</option>
+            </select>
+        </div>
+    </div>
+
+    <div id="cats" class="cats">
+        <button class="active" data-cat="all">الكل</button>
+        <button data-cat="rice">الأرز</button>
+        <button data-cat="grains">الحبوب والبقوليات</button>
+        <button data-cat="canned">المعلبات</button>
+        <button data-cat="vegetables"><i class="fa-solid fa-carrot"></i> الخضار</button>
+        <button data-cat="meat"><i class="fa-solid fa-drumstick-bite"></i> اللحوم</button>
+        <button data-cat="restaurants"><i class="fa-solid fa-utensils"></i> مطاعم</button>
+    </div>
+
+    <div id="grid" class="grid"></div>
+    
+    <div id="empty" class="empty hidden">
+        <i class="fa-solid fa-box-open" style="font-size: 32px; color: var(--text-muted); margin-bottom: 8px;"></i>
+        <h3>لا توجد نتائج مطابقة</h3>
+        <p>جرّب كلمة بحث أخرى أو غير القسم.</p>
+        <button id="reset" style="margin-top:10px; padding:8px 16px; background:var(--primary); color:white; border:none; border-radius:8px; cursor:pointer;">عرض كل المنتجات</button>
+    </div>
+
+    <!-- قسم الطلبات الخاصة للمنتجات غير الموجودة -->
+    <div class="missing-box">
+        <h3>هل تبحث عن منتج معين وغير موجود في الموقع؟</h3>
+        <p>اكتب لنا اسم المنتج وسوف نوفره لك فوراً ونرسل لك تفاصيله عبر الواتساب!</p>
+        <div class="missing-input-group">
+            <input type="text" id="missingProductInput" placeholder="اكتب اسم المنتج أو الطلب هنا...">
+            <button onclick="sendMissingProduct()"><i class="fa-brands fa-whatsapp"></i> اطلب المنتج</button>
+        </div>
+    </div>
+</main>
+
+<!-- زر واتساب عائم في الأسفل -->
+<a href="https://wa.me/" id="floatingWaBtn" target="_blank" class="whatsapp-float" aria-label="تواصل معنا عبر واتساب">
+    <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<div id="toast" class="toast"><i class="fa-solid fa-circle-check" style="color:var(--primary);"></i> تمت الإضافة إلى السلة بنجاح</div>
+<div id="overlay" class="overlay"></div>
+
+<aside id="drawer" class="drawer">
+    <div class="drawer-head">
+        <div>
+            <small>طلبك</small>
+            <h2>سلة التسوق <em id="drawerCount" style="font-style:normal;">0</em></h2>
+        </div>
+        <button id="closeCart" style="background:none; border:none; font-size:22px; cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div id="items" class="items"></div>
+    <div class="checkout-box">
+        <div class="total" style="display:flex; justify-content:space-between;"><span>المجموع</span><strong id="total">0 ل.س</strong></div>
+        <input id="custName" placeholder="الاسم الكامل">
+        <span id="nameError" class="form-error">يرجى إدخال الاسم</span>
+        <input id="custAddress" placeholder="العنوان بالتفصيل">
+        <span id="addressError" class="form-error">يرجى إدخال العنوان</span>
+        <button id="send" class="send"><i class="fa-brands fa-whatsapp" style="font-size: 18px;"></i> إرسال الطلب عبر واتساب</button>
+        <small style="color:var(--text-muted); text-align:center; font-size:11px;">سيتم إنشاء رسالة الطلب تلقائياً.</small>
+    </div>
+</aside>
+
+<script>
+window.PRODUCTS = [
+  { "name": "رز مصري بيوت الشام", "title": "رز مصري", "brand": "بيوت الشام", "price": 130, "image": "images/1.png", "alt": "رز مصري بيوت الشام", "category": "rice" },
+  { "name": "رز كريمي كيلو سيدي هشام", "title": "رز كريمي (1 كغ)", "brand": "سيدي هشام", "price": 250, "image": "images/2.png", "alt": "رز كريمي كيلو سيدي هشام", "category": "rice" },
+  { "name": "رز اسباني كيلو سيدي هشام", "title": "رز اسباني (1 كغ)", "brand": "سيدي هشام", "price": 250, "image": "images/3.png", "alt": "رز اسباني كيلو سيدي هشام", "category": "rice" },
+  { "name": "رز مصري كيلو الشيف نديم", "title": "رز مصري (1 كغ)", "brand": "الشيف نديم", "price": 130, "image": "images/4.png", "alt": "رز مصري كيلو الشيف نديم", "category": "rice" },
+  { "name": "رز كبسة كيلو الشيف نديم", "title": "رز كبسة (1 كغ)", "brand": "الشيف نديم", "price": 130, "image": "images/5.png", "alt": "رز كبسة كيلو الشيف نديم", "category": "rice" },
+  { "name": "رز كبسة طويل تايلاندي كيلو الريف", "title": "رز كبسة طويل تايلاندي (1 كغ)", "brand": "الريف", "price": 130, "image": "images/6.png", "alt": "رز كبسة طويل تايلاندي الريف", "category": "rice" },
+  { "name": "رز اسباني 5 كيلو سيدي هشام", "title": "رز اسباني (5 كغ)", "brand": "سيدي هشام", "price": 1050, "image": "images/7.png", "alt": "رز اسباني 5 كيلو سيدي هشام", "category": "rice" },
+  { "name": "رز صيني كيلو الريف", "title": "رز صيني (1 كغ)", "brand": "الريف", "price": 130, "image": "images/8.png", "alt": "رز صيني كيلو الريف", "category": "rice" },
+  { "name": "رز استرالي كيلو الريف", "title": "رز استرالي (1 كغ)", "brand": "الريف", "price": 190, "image": "images/9.png", "alt": "رز استرالي كيلو الريف", "category": "rice" },
+  { "name": "رز بسمتي كيلو ابو كاس", "title": "رز بسمتي (1 كغ)", "brand": "ابو كاس", "price": 250, "image": "images/10.png", "alt": "رز بسمتي كيلو ابو كاس", "category": "rice" },
+  { "name": "رز بسمتي هندي 5 كيلو ابو كاس", "title": "رز بسمتي هندي (5 كغ)", "brand": "ابو كاس", "price": 1150, "image": "images/11.png", "alt": "رز بسمتي هندي 5 كيلو ابو كاس", "category": "rice" },
+  { "name": "رز مصري كيلو الفخامة", "title": "رز مصري (1 كغ)", "brand": "الفخامة", "price": 140, "image": "images/12.png", "alt": "رز مصري كيلو الفخامة", "category": "rice" },
+  { "name": "رز بسمتي كريمي كيلو الفخامة", "title": "رز بسمتي كريمي (1 كغ)", "brand": "الفخامة", "price": 220, "image": "images/13.png", "alt": "رز بسمتي كريمي كيلو الفخامة", "category": "rice" },
+  { "name": "رز بسمتي الذهبي كيلو سيدي هشام", "title": "رز بسمتي الذهبي (1 كغ)", "brand": "سيدي هشام", "price": 250, "image": "images/14.png", "alt": "رز بسمتي الذهبي كيلو سيدي هشام", "category": "rice" },
+  { "name": "رز اسباني كيلو حسين الناصر", "title": "رز اسباني (1 كغ)", "brand": "حسين الناصر", "price": 210, "image": "images/15.png", "alt": "رز اسباني كيلو حسين الناصر", "category": "rice" },
+  { "name": "رز مصري كيلو حسين الناصر", "title": "رز مصري (1 كغ)", "brand": "حسين الناصر", "price": 140, "image": "images/16.png", "alt": "رز مصري كيلو حسين الناصر", "category": "rice" },
+  { "name": "رز صيني كيلو الارجوان", "title": "رز صيني (1 كغ)", "brand": "الارجوان", "price": 130, "image": "images/17.png", "alt": "رز صيني كيلو الارجوان", "category": "rice" },
+  { "name": "رز بسمتي كيلو ابو سيوف", "title": "رز بسمتي (1 كغ)", "brand": "ابو سيوف", "price": 260, "image": "images/18.png", "alt": "رز بسمتي كيلو ابو سيوف", "category": "rice" },
+  { "name": "ذرة بوشار كيلو سيدي هشام", "title": "ذرة بوشار (1 كغ)", "brand": "سيدي هشام", "price": 130, "image": "images/19.png", "alt": "ذرة بوشار كيلو سيدي هشام", "category": "grains" },
+  { "name": "فول كيلو سيدي هشام", "title": "فول (1 كغ)", "brand": "سيدي هشام", "price": 240, "image": "images/20.png", "alt": "فول كيلو سيدي هشام", "category": "grains" },
+  { "name": "شوفان 500غ سيدي هشام", "title": "شوفان (500 غ)", "brand": "سيدي هشام", "price": 150, "image": "images/21.png", "alt": "شوفان 500غ سيدي هشام", "category": "grains" },
+  { "name": "طحين زيرو الشيف نديم", "title": "طحين زيرو", "brand": "الشيف نديم", "price": 100, "image": "images/22.png", "alt": "طحين زيرو الشيف نديم", "category": "grains" },
+  { "name": "عدس ابيض كيلو سيدي هشام", "title": "عدس ابيض (1 كغ)", "brand": "سيدي هشام", "price": 240, "image": "images/23.png", "alt": "عدس ابيض كيلو سيدي هشام", "category": "grains" },
+  { "name": "فاصولياء بيضاء كيلو سيدي هشام", "title": "فاصولياء بيضاء (1 كغ)", "brand": "سيدي هشام", "price": 270, "image": "images/24.png", "alt": "فاصولياء بيضاء كيلو سيدي هشام", "category": "grains" },
+  { "name": "برغل خشن كيلو الشيف نديم", "title": "برغل خشن (1 كغ)", "brand": "الشيف نديم", "price": 110, "image": "images/25.png", "alt": "برغل خشن كيلو الشيف نديم", "category": "grains" },
+  { "name": "كشك كيلو سيدي هشام", "title": "كشك (1 كغ)", "brand": "سيدي هشام", "price": 400, "image": "images/26.png", "alt": "كشك كيلو سيدي هشام", "category": "grains" },
+  { "name": "فاصولياء حمراء كيلو سيدي هشام", "title": "فاصولياء حمراء (1 كغ)", "brand": "سيدي هشام", "price": 260, "image": "images/27.png", "alt": "فاصولياء حمراء كيلو سيدي هشام", "category": "grains" },
+  { "name": "عدس ابيض كيلو سيدي هشام", "title": "عدس ابيض (1 كغ)", "brand": "سيدي هشام", "price": 430, "image": "images/28.png", "alt": "عدس ابيض كيلو سيدي هشام", "category": "grains" },
+  { "name": "قمح كيلو سيدي هشام", "title": "قمح (1 كغ)", "brand": "سيدي هشام", "price": 100, "image": "images/29.png", "alt": "قمح كيلو سيدي هشام", "category": "grains" },
+  { "name": "عدس اسود كيلو معدنلي", "title": "عدس اسود (1 كغ)", "brand": "معدنلي", "price": 160, "image": "images/30.png", "alt": "عدس اسود كيلو معدنلي", "category": "grains" },
+  { "name": "فول كيلو معدنلي", "title": "فول (1 كغ)", "brand": "معدنلي", "price": 250, "image": "images/31.png", "alt": "فول كيلو معدنلي", "category": "grains" },
+  { "name": "حمص كيلو معدنلي", "title": "حمص (1 كغ)", "brand": "معدنلي", "price": 230, "image": "images/32.png", "alt": "حمص كيلو معدنلي", "category": "grains" },
+  { "name": "عدس ابيض كيلو معدنلي", "title": "عدس ابيض (1 كغ)", "brand": "معدنلي", "price": 260, "image": "images/33.png", "alt": "عدس ابيض كيلو معدنلي", "category": "grains" },
+  { "name": "عدس مجروش كيلو معدنلي", "title": "عدس مجروش (1 كغ)", "brand": "معدنلي", "price": 160, "image": "images/34.png", "alt": "عدس مجروش كيلو معدنلي", "category": "grains" },
+  { "name": "برغل ناعم كيلو معدنلي", "title": "برغل ناعم (1 كغ)", "brand": "معدنلي", "price": 110, "image": "images/35.png", "alt": "برغل ناعم كيلو معدنلي", "category": "grains" },
+  { "name": "فريكة كيلو سيدي هشام", "title": "فريكة (1 كغ)", "brand": "سيدي هشام", "price": 430, "image": "images/36.png", "alt": "فريكة كيلو سيدي هشام", "category": "grains" },
+  { "name": "برغل خشن كيلو معدنلي", "title": "برغل خشن (1 كغ)", "brand": "معدنلي", "price": 110, "image": "images/37.png", "alt": "برغل خشن كيلو معدنلي", "category": "grains" },
+  { "name": "بديل اللحمة خشنة 350غ زرزور", "title": "بديل اللحمة خشنة (350 غ)", "brand": "زرزور", "price": 180, "image": "images/38.png", "alt": "بديل اللحمة خشنة 350غ زرزور", "category": "grains" },
+  { "name": "بديل اللحمة ناعمة 350غ زرزور", "title": "بديل اللحمة ناعمة (350 غ)", "brand": "زرزور", "price": 180, "image": "images/39.png", "alt": "بديل اللحمة ناعمة 350غ زرزور", "category": "grains" },
+  { "name": "ملوخية مجففة 200غ الغوطة", "title": "ملوخية مجففة (200 غ)", "brand": "الغوطة", "price": 370, "image": "images/40.png", "alt": "ملوخية مجففة 200غ الغوطة", "category": "grains" },
+  { "name": "برغل ناعم كيلو حسين الناصر", "title": "برغل ناعم (1 كغ)", "brand": "حسين الناصر", "price": 110, "image": "images/41.png", "alt": "برغل ناعم كيلو حسين الناصر", "category": "grains" },
+  { "name": "ذرة بوشار كيلو معدنلي", "title": "ذرة بوشار (1 كغ)", "brand": "معدنلي", "price": 130, "image": "images/42.png", "alt": "ذرة بوشار كيلو معدنلي", "category": "grains" },
+  { "name": "حمص كيلو حسين الناصر", "title": "حمص (1 كغ)", "brand": "حسين الناصر", "price": 190, "image": "images/43.png", "alt": "حمص كيلو حسين الناصر", "category": "grains" },
+  { "name": "طحين كيلو معدنلي", "title": "طحين (1 كغ)", "brand": "معدنلي", "price": 100, "image": "images/44.png", "alt": "طحين كيلو معدنلي", "category": "grains" },
+  { "name": "فاصولياء بيضاء كيلو حسين الناصر", "title": "فاصولياء بيضاء (1 كغ)", "brand": "حسين الناصر", "price": 220, "image": "images/45.png", "alt": "فاصولياء بيضاء كيلو حسين الناصر", "category": "grains" },
+  { "name": "فريكة كيلو حسين الناصر", "title": "فريكة (1 كغ)", "brand": "حسين الناصر", "price": 420, "image": "images/46.png", "alt": "فريكة كيلو حسين الناصر", "category": "grains" },
+  { "name": "سميد ناعم كيلو معدنلي", "title": "سميد ناعم (1 كغ)", "brand": "معدنلي", "price": 110, "image": "images/47.png", "alt": "سميد ناعم كيلو معدنلي", "category": "grains" },
+  { "name": "قمح كيلو حسين الناصر", "title": "قمح (1 كغ)", "brand": "حسين الناصر", "price": 100, "image": "images/48.png", "alt": "قمح كيلو حسين الناصر", "category": "grains" },
+  { "name": "كشكة كيلو معدنلي", "title": "كشكة (1 كغ)", "brand": "معدنلي", "price": 420, "image": "images/49.png", "alt": "كشكة كيلو معدنلي", "category": "grains" },
+  { "name": "فاصولياء عريضة كيلو معدنلي", "title": "فاصولياء عريضة (1 كغ)", "brand": "معدنلي", "price": 440, "image": "images/50.png", "alt": "فاصولياء عريضة كيلو معدنلي", "category": "grains" },
+  { "name": "كشك (500 غ) الشيف نديم", "title": "كشك (500 غ)", "brand": "الشيف نديم", "price": 200, "image": "images/51.png", "alt": "كشك (500 غ) الشيف نديم", "category": "grains" },
+  { "name": "فاصولياء عريضة (1 كغ) الشيف نديم", "title": "فاصولياء عريضة (1 كغ)", "brand": "الشيف نديم", "price": 280, "image": "images/52.png", "alt": "فاصولياء عريضة (1 كغ) الشيف نديم", "category": "grains" },
+  { "name": "فاصولياء عريضة (1 كغ) سيدي هشام", "title": "فاصولياء عريضة (1 كغ)", "brand": "سيدي هشام", "price": 280, "image": "images/53.png", "alt": "فاصولياء عريضة (1 كغ) سيدي هشام", "category": "grains" },
+  { "name": "ترمس (1 كغ) سيدي هشام", "title": "ترمس (1 كغ)", "brand": "سيدي هشام", "price": 280, "image": "images/54.png", "alt": "ترمس (1 كغ) سيدي هشام", "category": "grains" },
+  { "name": "عدس مجروش (1 كغ) الفخامة", "title": "عدس مجروش (1 كغ)", "brand": "الفخامة", "price": 140, "image": "images/55.png", "alt": "عدس مجروش (1 كغ) الفخامة", "category": "grains" },
+  { "name": "برغل خشن (1 كغ) الفخامة", "title": "برغل خشن (1 كغ)", "brand": "الفخامة", "price": 110, "image": "images/56.png", "alt": "برغل خشن (1 كغ) الفخامة", "category": "grains" },
+  { "name": "سميد (1 كغ) سيدي هشام", "title": "سميد (1 كغ)", "brand": "سيدي هشام", "price": 110, "image": "images/57.png", "alt": "سميد (1 كغ) سيدي هشام", "category": "grains" },
+  { "name": "ملوخية (200 غ) تنورين", "title": "ملوخية (200 غ)", "brand": "تنورين", "price": 360, "image": "images/58.png", "alt": "ملوخية (200 غ) تنورين", "category": "grains" },
+  { "name": "عدس ابيض (1 كغ) حسين الناصر", "title": "عدس ابيض (1 كغ)", "brand": "حسين الناصر", "price": 210, "image": "images/59.png", "alt": "عدس ابيض (1 كغ) حسين الناصر", "category": "grains" },
+  { "name": "ملح (250 غ) الشيف نديم", "title": "ملح (250 غ)", "brand": "الشيف نديم", "price": 15, "image": "images/60.png", "alt": "ملح (250 غ) الشيف نديم", "category": "grains" },
+  { "name": "طحين (1 كغ) سيدي هشام", "title": "طحين (1 كغ)", "brand": "سيدي هشام", "price": 100, "image": "images/61.png", "alt": "طحين (1 كغ) سيدي هشام", "category": "grains" },
+  { "name": "برغل احمر خشن (1 كغ) سيدي هشام", "title": "برغل احمر خشن (1 كغ)", "brand": "سيدي هشام", "price": 110, "image": "images/62.png", "alt": "برغل احمر خشن (1 كغ) سيدي هشام", "category": "grains" },
+  { "name": "برغل احمر ناعم (1 كغ) سيدي هشام", "title": "برغل احمر ناعم (1 كغ)", "brand": "سيدي هشام", "price": 110, "image": "images/63.png", "alt": "برغل احمر ناعم (1 كغ) سيدي هشام", "category": "grains" },
+  { "name": "برغل خشن (1 كغ) سيدي هشام", "title": "برغل خشن (1 كغ)", "brand": "سيدي هشام", "price": 110, "image": "images/64.png", "alt": "برغل خشن (1 كغ) سيدي هشام", "category": "grains" },
+  { "name": "عدس مجروش (1 كغ) سيدي هشام", "title": "عدس مجروش (1 كغ)", "brand": "سيدي هشام", "price": 150, "image": "images/65.png", "alt": "عدس مجروش (1 كغ) سيدي هشام", "category": "grains" },
+  { "name": "عدس اسود (1 كغ) سيدي هشام", "title": "عدس اسود (1 كغ)", "brand": "سيدي هشام", "price": 150, "image": "images/66.png", "alt": "عدس اسود (1 كغ) سيدي هشام", "category": "grains" },
+  { "name": "طحين (1 كغ) حسين الناصر", "title": "طحين (1 كغ)", "brand": "حسين الناصر", "price": 90, "image": "images/67.png", "alt": "طحين (1 كغ) حسين الناصر", "category": "grains" },
+  { "name": "بوشار (1 كغ) حسين الناصر", "title": "بوشار (1 كغ)", "brand": "حسين الناصر", "price": 120, "image": "images/68.png", "alt": "بوشار (1 كغ) حسين الناصر", "category": "grains" },
+  { "name": "فول (1 كغ) حسين الناصر", "title": "فول (1 كغ)", "brand": "حسين الناصر", "price": 120, "image": "images/69.png", "alt": "فول (1 كغ) حسين الناصر", "category": "grains" },
+  { "name": "شرائح اناناس (565 غ) سيدي هشام", "title": "شرائح اناناس (565 غ)", "brand": "سيدي هشام", "price": 190, "image": "images/70.png", "alt": "شرائح اناناس (565 غ) سيدي هشام", "category": "canned" },
+  { "name": "سردين (125 غ) بيوت الشام", "title": "سردين (125 غ)", "brand": "بيوت الشام", "price": 80, "image": "images/71.png", "alt": "سردين (125 غ) بيوت الشام", "category": "canned" },
+  { "name": "فطر شرائح (350 غ) الدرة", "title": "فطر شرائح (350 غ)", "brand": "الدرة", "price": 270, "image": "images/72.png", "alt": "فطر شرائح (350 غ) الدرة", "category": "canned" },
+  { "name": "مسبحة (400 غ) سولو", "title": "مسبحة (400 غ)", "brand": "سولو", "price": 120, "image": "images/73.png", "alt": "مسبحة (400 غ) سولو", "category": "canned" },
+  { "name": "تونا سكيب جاك (140 غ) ليو", "title": "تونا سكيب جاك (140 غ)", "brand": "ليو", "price": 130, "image": "images/74.png", "alt": "تونا سكيب جاك (140 غ) ليو", "category": "canned" },
+  { "name": "فطر مقطع (375 غ) ليو", "title": "فطر مقطع (375 غ)", "brand": "ليو", "price": 210, "image": "images/75.png", "alt": "فطر مقطع (375 غ) ليو", "category": "canned" },
+  { "name": "سردين حلو (125 غ) ليو", "title": "سردين حلو (125 غ)", "brand": "ليو", "price": 120, "image": "images/76.png", "alt": "سردين حلو (125 غ) ليو", "category": "canned" },
+  { "name": "حمص حب (370 غ) زهر البستان", "title": "حمص حب (370 غ)", "brand": "زهر البستان", "price": 100, "image": "images/77.png", "alt": "حمص حب (370 غ) زهر البستان", "category": "canned" },
+  { "name": "تونا تونغول حار دايت (185 غ) سيدي هشام", "title": "تونا تونغول حار دايت (185 غ)", "brand": "سيدي هشام", "price": 210, "image": "images/78.png", "alt": "تونا تونغول حار دايت (185 غ) سيدي هشام", "category": "canned" },
+  { "name": "تونا سكيب جاك حلو (160 غ) سيدي هشام", "title": "تونا سكيب جاك حلو (160 غ)", "brand": "سيدي هشام", "price": 150, "image": "images/79.png", "alt": "تونا سكيب جاك حلو (160 غ) سيدي هشام", "category": "canned" },
+  { "name": "حمص حب تنورين", "title": "حمص حب", "brand": "تنورين", "price": 110, "image": "images/80.png", "alt": "حمص حب تنورين", "category": "canned" },
+  { "name": "بازيلاء (800 غ) تنورين", "title": "بازيلاء (800 غ)", "brand": "تنورين", "price": 180, "image": "images/81.png", "alt": "بازيلاء (800 غ) تنورين", "category": "canned" },
+  { "name": "بازيلاء (400 غ) تنورين", "title": "بازيلاء (400 غ)", "brand": "تنورين", "price": 100, "image": "images/82.png", "alt": "بازيلاء (400 غ) تنورين", "category": "canned" },
+  { "name": "مرتاديلا دجاج (850 غ) زينة", "title": "مرتاديلا دجاج (850 غ)", "brand": "زينة", "price": 290, "image": "images/83.png", "alt": "مرتاديلا دجاج (850 غ) زينة", "category": "canned" },
+  { "name": "مرتاديلا (200 غ) زينة", "title": "مرتاديلا (200 غ)", "brand": "زينة", "price": 90, "image": "images/84.png", "alt": "مرتاديلا (200 غ) زينة", "category": "canned" },
+  { "name": "مرتاديلا دجاج (380 غ) هنا", "title": "مرتاديلا دجاج (380 غ)", "brand": "هنا", "price": 160, "image": "images/85.png", "alt": "مرتاديلا دجاج (380 غ) هنا", "category": "canned" },
+  { "name": "مرتاديلا دجاج (1820 غ) هنا", "title": "مرتاديلا دجاج (1820 غ)", "brand": "هنا", "price": 470, "image": "images/86.png", "alt": "مرتاديلا دجاج (1820 غ) هنا", "category": "canned" },
+  { "name": "مرتاديلا دجاج (850 غ) هنا", "title": "مرتاديلا دجاج (850 غ)", "brand": "هنا", "price": 330, "image": "images/87.png", "alt": "مرتاديلا دجاج (850 غ) هنا", "category": "canned" },
+  { "name": "ذرة (330 غ) الدرة", "title": "ذرة (330 غ)", "brand": "الدرة", "price": 90, "image": "images/88.png", "alt": "ذرة (330 غ) الدرة", "category": "canned" },
+  { "name": "ذرة (2600 غ) الدرة", "title": "ذرة (2600 غ)", "brand": "الدرة", "price": 500, "image": "images/89.png", "alt": "ذرة (2600 غ) الدرة", "category": "canned" },
+  { "name": "مرتاديلا (200 غ) الدرة", "title": "مرتاديلا (200 غ)", "brand": "الدرة", "price": 100, "image": "images/90.png", "alt": "مرتاديلا (200 غ) الدرة", "category": "canned" },
+  { "name": "مرتاديلا (380 غ) الدرة", "title": "مرتاديلا (380 غ)", "brand": "الدرة", "price": 160, "image": "images/91.png", "alt": "مرتاديلا (380 غ) الدرة", "category": "canned" },
+  { "name": "مرتاديلا (850 غ) الدرة", "title": "مرتاديلا (850 غ)", "brand": "الدرة", "price": 310, "image": "images/92.png", "alt": "مرتاديلا (850 غ) الدرة", "category": "canned" },
+  { "name": "ورق عنب (1300 غ) الدرة", "title": "ورق عنب (1300 غ)", "brand": "الدرة", "price": 480, "image": "images/93.png", "alt": "ورق عنب (1300 غ) الدرة", "category": "canned" },
+  { "name": "ورق عنب (600 غ) الدرة", "title": "ورق عنب (600 غ)", "brand": "الدرة", "price": 260, "image": "images/94.png", "alt": "ورق عنب (600 غ) الدرة", "category": "canned" },
+  { "name": "ارضي شوكي (1300 غ) الدرة", "title": "ارضي شوكي (1300 غ)", "brand": "الدرة", "price": 530, "image": "images/95.png", "alt": "ارضي شوكي (1300 غ) الدرة", "category": "canned" },
+  { "name": "ارضي شوكي (1200 غ) زهرة البستان", "title": "ارضي شوكي (1200 غ)", "brand": "زهرة البستان", "price": 560, "image": "images/96.png", "alt": "ارضي شوكي (1200 غ) زهرة البستان", "category": "canned" },
+  { "name": "يالنجي (400 غ) زهرة البستان", "title": "يالنجي (400 غ)", "brand": "زهرة البستان", "price": 220, "image": "images/97.png", "alt": "يالنجي (400 غ) زهرة البستان", "category": "canned" },
+  { "name": "ورق عنب (1250 غ) زهرة البستان", "title": "ورق عنب (1250 غ)", "brand": "زهرة البستان", "price": 520, "image": "images/98.png", "alt": "ورق عنب (1250 غ) زهرة البستان", "category": "canned" },
+  { "name": "ذرة (340 غ) الغوطة", "title": "ذرة (340 غ)", "brand": "الغوطة", "price": 130, "image": "images/99.png", "alt": "ذرة (340 غ) الغوطة", "category": "canned" },
+  { "name": "مسبحة (380 غ) الغوطة", "title": "مسبحة (380 غ)", "brand": "الغوطة", "price": 170, "image": "images/100.png", "alt": "مسبحة (380 غ) الغوطة", "category": "canned" },
+
+  // فئة الخضار الطازجة
+  { "name": "بندورة طازجة كيلو", "title": "بندورة طازجة (1 كغ)", "brand": "خضار طازجة", "price": 90, "image": "images/1.png", "alt": "بندورة طازجة", "category": "vegetables" },
+  { "name": "خيار بلدي كيلو", "title": "خيار بلدي (1 كغ)", "brand": "خضار طازجة", "price": 80, "image": "images/2.png", "alt": "خيار بلدي", "category": "vegetables" },
+  { "name": "بطاطا محلية كيلو", "title": "بطاطا (1 كغ)", "brand": "خضار طازجة", "price": 75, "image": "images/3.png", "alt": "بطاطا", "category": "vegetables" },
+  { "name": "حزمة باقدونس طازجة", "title": "بقدونس", "brand": "خضار طازجة", "price": 25, "image": "images/4.png", "alt": "بقدونس", "category": "vegetables" },
+
+  // فئة اللحوم
+  { "name": "لحمة هبرة غنم كيلو", "title": "لحمة هبرة غنم (1 كغ)", "brand": "ملحمة الطيبي", "price": 1200, "image": "images/5.png", "alt": "لحمة غنم", "category": "meat" },
+  { "name": "دجاجة كاملة طازجة وزن كيلو ونصف", "title": "دجاج طازج", "brand": "مزرعة الخير", "price": 450, "image": "images/6.png", "alt": "دجاج طازج", "category": "meat" },
+  { "name": "سجق أرماني كيلو", "title": "سجق (1 كغ)", "brand": "ملحمة الطيبي", "price": 950, "image": "images/7.png", "alt": "سجق", "category": "meat" },
+
+  // فئة المطاعم والوجبات
+  { "name": "وجبة شاورما عربي دبل", "title": "وجبة شاورما عربي", "brand": "مطاعم الشام", "price": 350, "image": "images/8.png", "alt": "شاورما عربي", "category": "restaurants" },
+  { "name": "برجر دجاج كومبو", "title": "برجر دجاج", "brand": "مطاعم الشام", "price": 300, "image": "images/9.png", "alt": "برجر دجاج", "category": "restaurants" },
+  { "name": "صيادية طاووق مع العيار", "title": "وجبة طاووق", "brand": "مطاعم الشام", "price": 400, "image": "images/10.png", "alt": "طاووق", "category": "restaurants" }
+];
+
+let cart = JSON.parse(localStorage.getItem('tayebat_cart')) || [];
+let currentCat = 'all';
+
+const grid = document.getElementById('grid');
+const searchInput = document.getElementById('search');
+const countEl = document.getElementById('count');
+const emptyEl = document.getElementById('empty');
+const cartCount = document.getElementById('cartCount');
+const drawerCount = document.getElementById('drawerCount');
+const drawer = document.getElementById('drawer');
+const overlay = document.getElementById('overlay');
+const itemsContainer = document.getElementById('items');
+const totalEl = document.getElementById('total');
+
+function renderProducts() {
+    let query = searchInput.value.trim().toLowerCase();
+    let filtered = window.PRODUCTS.filter(p => {
+        let matchesCat = currentCat === 'all' || p.category === currentCat || (currentCat === 'rice' && p.name.includes('رز'));
+        let matchesQuery = p.name.toLowerCase().includes(query) || p.brand.toLowerCase().includes(query);
+        return matchesCat && matchesQuery;
+    });
+
+    let sortVal = document.getElementById('sort').value;
+    if (sortVal === 'low') filtered.sort((a,b) => a.price - b.price);
+    if (sortVal === 'high') filtered.sort((a,b) => b.price - a.price);
+    if (sortVal === 'az') filtered.sort((a,b) => a.name.localeCompare(b.name, 'ar'));
+
+    countEl.textContent = `عرض ${filtered.length} منتج`;
+    if(filtered.length === 0) {
+        grid.innerHTML = '';
+        emptyEl.classList.remove('hidden');
+        return;
+    }
+    emptyEl.classList.add('hidden');
+
+    grid.innerHTML = filtered.map((p) => `
+        <div class="card">
+            <div>
+                <img src="${p.image}" alt="${p.alt}" loading="lazy" onerror="this.src='https://via.placeholder.com/150?text=Tayebat'">
+                <div class="brand">${p.brand}</div>
+                <h3>${p.title}</h3>
+            </div>
+            <div class="price-row">
+                <span class="price">${p.price} ل.س</span>
+                <button onclick="addToCart('${p.name.replace(/'/g, "\\'")}', ${p.price})">إضافة</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function addToCart(name, price) {
+    let item = cart.find(i => i.name === name);
+    if (item) { item.qty++; } else { cart.push({name, price, qty: 1}); }
+    saveAndSyncCart();
+    showToast();
+}
+
+function saveAndSyncCart() {
+    localStorage.setItem('tayebat_cart', JSON.stringify(cart));
+    updateCart();
+}
+
+function updateCart() {
+    let totalQty = cart.reduce((sum, i) => sum + i.qty, 0);
+    let totalPrice = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+    cartCount.textContent = totalQty;
+    drawerCount.textContent = totalQty;
+    totalEl.textContent = totalPrice + " ل.س";
+
+    itemsContainer.innerHTML = cart.map((i, idx) => `
+        <div class="cart-item">
+            <div>
+                <div style="font-weight:700; font-size:13px;">${i.name}</div>
+                <div style="font-size:12px; color:var(--text-muted);">${i.price} ل.س × ${i.qty}</div>
+            </div>
+            <button onclick="removeFromCart(${idx})" style="background:#ef4444; color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer; font-size:11px;"><i class="fa-solid fa-trash"></i></button>
+        </div>
+    `).join('') || '<p style="text-align:center; color:var(--text-muted); padding: 20px 0;">السلة فارغة</p>';
+}
+
+function removeFromCart(idx) {
+    cart.splice(idx, 1);
+    saveAndSyncCart();
+}
+
+function showToast() {
+    let t = document.getElementById('toast');
+    t.style.display = 'block';
+    setTimeout(() => { t.style.display = 'none'; }, 2000);
+}
+
+// إرسال المنتج غير الموجود عبر واتساب
+function sendMissingProduct() {
+    let input = document.getElementById('missingProductInput');
+    let val = input.value.trim();
+    if(!val) {
+        alert('يرجى كتابة اسم المنتج أولاً');
+        return;
+    }
+    let text = `مرحباً، أريد طلب هذا المنتج غير الموجود في الموقع:%0A- ${val}`;
+    window.open(`https://wa.me/?text=${text}`, '_blank');
+}
+
+document.querySelectorAll('.cats button').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.cats button').forEach(b => b.classList.remove('active'));
+        let targetBtn = e.target.closest('button');
+        targetBtn.classList.add('active');
+        currentCat = targetBtn.dataset.cat;
+        renderProducts();
+    });
+});
+
+searchInput.addEventListener('input', renderProducts);
+document.getElementById('sort').addEventListener('change', renderProducts);
+document.getElementById('clear').addEventListener('click', () => { searchInput.value = ''; renderProducts(); });
+document.getElementById('reset').addEventListener('click', () => { searchInput.value = ''; currentCat='all'; document.querySelector('.cats button').click(); renderProducts(); });
+
+document.getElementById('openCart').addEventListener('click', () => { drawer.classList.add('active'); overlay.classList.add('active'); });
+document.getElementById('closeCart').addEventListener('click', () => { drawer.classList.remove('active'); overlay.classList.remove('active'); });
+overlay.addEventListener('click', () => { drawer.classList.remove('active'); overlay.classList.remove('active'); });
+
+document.getElementById('send').addEventListener('click', () => {
+    let nameInput = document.getElementById('custName');
+    let addressInput = document.getElementById('custAddress');
+    let nameError = document.getElementById('nameError');
+    let addressError = document.getElementById('addressError');
+    
+    let isValid = true;
+    
+    if(!nameInput.value.trim()) {
+        nameError.style.display = 'block';
+        isValid = false;
+    } else {
+        nameError.style.display = 'none';
+    }
+    
+    if(!addressInput.value.trim()) {
+        addressError.style.display = 'block';
+        isValid = false;
+    } else {
+        addressError.style.display = 'none';
+    }
+    
+    if(!isValid) return;
+    
+    let text = `طلب جديد من متجر طيبات:%0Aالاسم: ${nameInput.value}%0Aالعنوان: ${addressInput.value}%0A%0Aالطلبات:%0A`;
+    cart.forEach(i => { text += `- ${i.name} (${i.qty}) - ${i.price * i.qty} ل.س%0A`; });
+    text += `%0Aالمجموع الكلي: ${totalEl.textContent}`;
+    window.open(`https://wa.me/?text=${text}`, '_blank');
+});
+
+updateCart();
+renderProducts();
+</script>
+</body>
+</html>
