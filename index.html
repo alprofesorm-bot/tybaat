@@ -3,20 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>طيبات | متجر المواد الغذائية والمنتجات الطازجة</title>
+<title>بوصلة | الوجهة الأولى والدقيقة لكل ما تحتاجه الأسرة من مؤونة</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 :root {
-    --primary: #d4af37;
-    --primary-dark: #aa8c2c;
-    --bg: #fdfbf7;
+    --primary: #0284c7;
+    --primary-dark: #0369a1;
+    --accent: #38bdf8;
+    --bg: #f0f9ff;
     --surface: #ffffff;
-    --text: #1e293b;
+    --text: #0f172a;
     --text-muted: #64748b;
-    --border: #e2e8f0;
+    --border: #bae6fd;
     --radius: 12px;
     --danger: #ef4444;
 }
@@ -31,7 +32,7 @@ body { background: var(--bg); color: var(--text); padding-bottom: 50px; }
     .header-grid { flex-direction: row; justify-content: space-between; align-items: center; }
 }
 .logo { font-size: 22px; font-weight: 800; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 10px; }
-.logo-badge { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 10px; box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3); font-size: 18px; }
+.logo-badge { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 10px; box-shadow: 0 4px 10px rgba(2, 132, 199, 0.3); font-size: 18px; }
 .search { display: flex; align-items: center; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 8px 12px; gap: 8px; flex: 1; max-width: 500px; }
 .search input { border: none; background: none; outline: none; width: 100%; font-size: 14px; }
 .search button { background: none; border: none; font-size: 16px; cursor: pointer; color: var(--text-muted); }
@@ -39,10 +40,12 @@ body { background: var(--bg); color: var(--text); padding-bottom: 50px; }
 .cart-btn:hover { background: var(--primary-dark); }
 
 /* Hero */
-.hero { background: linear-gradient(135deg, #aa8c2c, #d4af37); color: white; padding: 32px 16px; text-align: center; margin-bottom: 24px; }
+.hero { background: linear-gradient(135deg, #0369a1, #0284c7); color: white; padding: 32px 16px; text-align: center; margin-bottom: 24px; }
+.hero small { background: rgba(255, 255, 255, 0.2); padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; margin-bottom: 8px; }
 .hero h1 { font-size: 24px; margin-bottom: 12px; font-weight: 800; }
 .hero p { font-size: 14px; margin-bottom: 16px; opacity: 0.95; }
-.hero-btn { display: inline-block; background: white; color: var(--primary-dark); padding: 10px 20px; border-radius: var(--radius); font-weight: 700; text-decoration: none; }
+.hero-btn { display: inline-block; background: white; color: var(--primary-dark); padding: 10px 20px; border-radius: var(--radius); font-weight: 700; text-decoration: none; transition: transform 0.2s; }
+.hero-btn:hover { transform: translateY(-2px); }
 
 /* Main Content */
 .top { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
@@ -62,7 +65,7 @@ body { background: var(--bg); color: var(--text); padding-bottom: 50px; }
 .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 @media (min-width: 768px) { .grid { grid-template-columns: repeat(4, 1fr); gap: 16px; } }
 .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s, box-shadow 0.2s; }
-.card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(2, 132, 199, 0.1); }
 .card img { width: 100%; height: 120px; object-fit: contain; margin-bottom: 8px; }
 .card h3 { font-size: 14px; margin-bottom: 4px; font-weight: 700; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .card .brand { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
@@ -103,7 +106,7 @@ body { background: var(--bg); color: var(--text); padding-bottom: 50px; }
 .items { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
 .cart-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
 .checkout-box { padding: 16px; border-top: 1px solid var(--border); background: var(--bg); display: flex; flex-direction: column; gap: 8px; }
-.checkout-box input { padding: 10px; border-radius: var(--radius); border: 1px solid var(--border); font-size: 14px; outline: none; }
+.checkout-box input, .checkout-box select { padding: 10px; border-radius: var(--radius); border: 1px solid var(--border); font-size: 14px; outline: none; background: #fff; }
 .form-error { font-size: 11px; color: var(--danger); display: none; margin-top: -4px; }
 .send { background: #25d366; color: white; border: none; padding: 12px; border-radius: var(--radius); font-weight: 700; cursor: pointer; text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px; }
 
@@ -116,7 +119,7 @@ body { background: var(--bg); color: var(--text); padding-bottom: 50px; }
 <header class="header">
     <div class="wrap header-grid">
         <a class="logo" href="#">
-            <div class="logo-badge"><i class="fa-solid fa-basket-shopping"></i></div> طيبات
+            <div class="logo-badge"><i class="fa-solid fa-compass"></i></div> بوصلة
         </a>
         <div class="search">
             <i class="fa-solid fa-magnifying-glass"></i>
@@ -129,8 +132,8 @@ body { background: var(--bg); color: var(--text); padding-bottom: 50px; }
 
 <section class="hero">
     <div class="wrap">
-        <small>منصة طيبات العصرية</small>
-        <h1>أجود المواد الغذائية والحبوب والمعلبات</h1>
+        <small>منصة بوصلة العصرية</small>
+        <h1>الوجهة الأولى والدقيقة لكل ما تحتاجه الأسرة من مؤونة</h1>
         <p>اطلب احتياجات منزلك من الأرز، البقوليات، والمعلبات بطلب واحد سريع وسهل.</p>
         <a href="#products" class="hero-btn">تصفح المنتجات الآن <i class="fa-solid fa-arrow-left"></i></a>
     </div>
@@ -199,12 +202,21 @@ body { background: var(--bg); color: var(--text); padding-bottom: 50px; }
     </div>
     <div id="items" class="items"></div>
     <div class="checkout-box">
+        <div style="background: #e0f2fe; color: #0369a1; padding: 8px 12px; border-radius: 8px; font-size: 12px; text-align: center; font-weight: 700; border: 1px solid #bae6fd;">
+            اختر منطقة التوصيل لتحديد السعر تلقائياً
+        </div>
+        
+        <select id="deliveryArea" onchange="updateCart()">
+            <option value="صحنايا">صحنايا (70 ل.س)</option>
+            <option value="أشرفية صحنايا">أشرفية صحنايا (1200 ل.س)</option>
+        </select>
+
         <div class="total" style="display:flex; justify-content:space-between;"><span>المجموع</span><strong id="total">0 ل.س</strong></div>
         <input id="custName" placeholder="الاسم الكامل">
         <span id="nameError" class="form-error">يرجى إدخال الاسم</span>
         <input id="custAddress" placeholder="العنوان بالتفصيل">
         <span id="addressError" class="form-error">يرجى إدخال العنوان</span>
-        <button id="send" class="send"><i class="fa-brands fa-whatsapp" style="font-size: 18px;"></i> إرسال الطلب عبر واتساب</button>
+        <button id="send" class="send"><i class="fa-brands fa-whatsapp" style="font-size: 18px;"></i> ارسال الطلب واتس اب</button>
         <small style="color:var(--text-muted); text-align:center; font-size:11px;">سيتم إنشاء رسالة الطلب تلقائياً.</small>
     </div>
 </aside>
@@ -313,7 +325,7 @@ window.PRODUCTS = [
   { "name": "مسبحة (380 غ) الغوطة", "title": "مسبحة (380 غ)", "brand": "الغوطة", "price": 170, "image": "images/100.png", "alt": "مسبحة (380 غ) الغوطة", "category": "canned" }
 ];
 
-let cart = JSON.parse(localStorage.getItem('tayebat_cart')) || [];
+let cart = JSON.parse(localStorage.getItem('bosla_cart')) || [];
 let currentCat = 'all';
 
 const grid = document.getElementById('grid');
@@ -326,6 +338,7 @@ const drawer = document.getElementById('drawer');
 const overlay = document.getElementById('overlay');
 const itemsContainer = document.getElementById('items');
 const totalEl = document.getElementById('total');
+const deliveryAreaSelect = document.getElementById('deliveryArea');
 
 function renderProducts() {
     let query = searchInput.value.trim().toLowerCase();
@@ -367,7 +380,7 @@ function renderProducts() {
         return `
             <div class="card">
                 <div>
-                    <img src="${p.image}" alt="${p.alt}" loading="lazy" onerror="this.src='https://via.placeholder.com/150?text=Tayebat'">
+                    <img src="${p.image}" alt="${p.alt}" loading="lazy" onerror="this.src='https://via.placeholder.com/150?text=Bosla'">
                     <div class="brand">${p.brand}</div>
                     <h3>${p.title}</h3>
                 </div>
@@ -400,18 +413,24 @@ function updateItemQty(name, price, change) {
 }
 
 function saveAndSyncCart() {
-    localStorage.setItem('tayebat_cart', JSON.stringify(cart));
+    localStorage.setItem('bosla_cart', JSON.stringify(cart));
     updateCart();
 }
 
 function updateCart() {
     let totalQty = cart.reduce((sum, i) => sum + i.qty, 0);
-    let totalPrice = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+    let itemsPrice = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+    
+    let selectedArea = deliveryAreaSelect.value;
+    let currentDeliveryFee = selectedArea === 'أشرفية صحنايا' ? 1200 : 70;
+    
+    let totalPrice = cart.length > 0 ? itemsPrice + currentDeliveryFee : 0;
+    
     cartCount.textContent = totalQty;
     drawerCount.textContent = totalQty;
-    totalEl.textContent = totalPrice + " ل.س";
+    totalEl.textContent = totalPrice + ` ل.س (شامل التوصيل ${currentDeliveryFee} ل.س)`;
 
-    itemsContainer.innerHTML = cart.map((i, idx) => `
+    let html = cart.map((i, idx) => `
         <div class="cart-item">
             <div>
                 <div style="font-weight:700; font-size:13px;">${i.name}</div>
@@ -420,6 +439,17 @@ function updateCart() {
             <button onclick="removeFromCart('${i.name.replace(/'/g, "\\'")}')" style="background:#ef4444; color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer; font-size:11px;"><i class="fa-solid fa-trash"></i></button>
         </div>
     `).join('') || '<p style="text-align:center; color:var(--text-muted); padding: 20px 0;">السلة فارغة</p>';
+
+    if(cart.length > 0) {
+        html += `
+            <div style="display:flex; justify-content:space-between; align-items:center; border-top: 1px dashed var(--border); padding-top: 8px; font-size: 13px; color: var(--text-muted);">
+                <span>سعر التوصيل (${selectedArea})</span>
+                <span>${currentDeliveryFee} ل.س</span>
+            </div>
+        `;
+    }
+
+    itemsContainer.innerHTML = html;
 }
 
 function removeFromCart(name) {
@@ -441,7 +471,7 @@ function sendMissingProduct() {
         alert('يرجى كتابة اسم المنتج أولاً');
         return;
     }
-    let text = `مرحباً، أريد طلب هذا المنتج غير الموجود في الموقع:%0A- ${val}`;
+    let text = `مرحباً، أريد طلب هذا المنتج غير الموجود في موقع بوصلة:%0A- ${val}`;
     window.open(`https://wa.me/963958953282?text=${text}`, '_blank');
 }
 
@@ -488,9 +518,15 @@ document.getElementById('send').addEventListener('click', () => {
     
     if(!isValid) return;
     
-    let text = `طلب جديد من متجر طيبات:%0Aالاسم: ${nameInput.value}%0Aالعنوان: ${addressInput.value}%0A%0Aالطلبات:%0A`;
+    let selectedArea = deliveryAreaSelect.value;
+    let currentDeliveryFee = selectedArea === 'أشرفية صحنايا' ? 1200 : 70;
+    let itemsPrice = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+    let totalPrice = itemsPrice + currentDeliveryFee;
+
+    let text = `طلب جديد من متجر بوصلة:%0Aالاسم: ${nameInput.value}%0Aمنطقة التوصيل: ${selectedArea}%0Aالعنوان: ${addressInput.value}%0A%0Aالطلبات:%0A`;
     cart.forEach(i => { text += `- ${i.name} (${i.qty}) - ${i.price * i.qty} ل.س%0A`; });
-    text += `%0Aالمجموع الكلي: ${totalEl.textContent}`;
+    text += `%0Aسعر التوصيل: ${currentDeliveryFee} ل.س (${selectedArea})%0A`;
+    text += `المجموع الكلي: ${totalPrice} ل.س`;
     
     window.open(`https://wa.me/963958953282?text=${text}`, '_blank');
 });
